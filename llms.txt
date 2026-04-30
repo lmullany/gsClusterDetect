@@ -22,6 +22,7 @@ longitude (i.e the centroid of each location).
 Install the `gsClusterDetect` package from CRAN as follows:
 
 ``` r
+
 install.packages("gsClusterDetect")
 ```
 
@@ -31,6 +32,7 @@ Install the development version from Github as follows:
 (dev)](https://github.com/lmullany/gsClusterDetect/actions/workflows/R-CMD-check.yaml/badge.svg?branch=dev&event=push)](https://github.com/lmullany/gsClusterDetect/actions/workflows/R-CMD-check.yaml)
 
 ``` r
+
 devtools::install_github("lmullany/gsClusterDetect", branch = "dev")
 ```
 
@@ -76,6 +78,7 @@ Names: loc_vec distance_matrix
     date.
 
 ``` r
+
 detect_date <- max(df[, date])
 ```
 
@@ -87,6 +90,7 @@ detect_date <- max(df[, date])
     maximum size of the clusters) to 50 (miles).
 
 ``` r
+
 clusters <- find_clusters(
     cases = df,
     distance_matrix = ohio_dm[["distance_matrix"]],
@@ -184,3 +188,5 @@ LLC.
 
 - [Vignette 1: Package
   Overview](https://lmullany.github.io/gsClusterDetect/articles/basic_demo.md):
+- [Vignette 2: Creating Distance
+  Objects](https://lmullany.github.io/gsClusterDetect/articles/distance_objects.md):
