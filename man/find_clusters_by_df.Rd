@@ -26,10 +26,10 @@ Wrapper around \code{find_clusters()} where only a data frame in the usual
 location, date, count format, a threshold value (distance limit), and the
 geographic resolution is required. The appropriate distance list will be
 auto created based on detected the states/locations given the data frame
-location column. The result will be returned as json
+location column. The result can be returned as json, if desired
 }
 \examples{
-find_clusters_by_df(example_count_data, 50, "county", return_json=TRUE)
+find_clusters_by_df(example_count_data, 50, "county", return_json = FALSE)
 
 }
 \seealso{

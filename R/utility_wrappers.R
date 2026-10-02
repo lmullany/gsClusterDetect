@@ -4,7 +4,7 @@
 #' location, date, count format, a threshold value (distance limit), and the
 #' geographic resolution is required. The appropriate distance list will be
 #' auto created based on detected the states/locations given the data frame
-#' location column. The result will be returned as json
+#' location column. The result can be returned as json, if desired
 #'
 #' @param df The data frame with location (char), date (IDate), and count (int)
 #' columns
@@ -16,7 +16,7 @@
 #' @export
 #' @returns result from find_clusters(), optionally converted to json
 #' @examples
-#' find_clusters_by_df(example_count_data, 50, "county", return_json = TRUE)
+#' find_clusters_by_df(example_count_data, 50, "county", return_json = FALSE)
 #'
 find_clusters_by_df <- function(
   df,
@@ -33,6 +33,7 @@ find_clusters_by_df <- function(
     stop("threshold value must be a positive numeric value in miles")
   }
 
+  # requires that the df has location, date, and count columns
   check_vars(df, c("location", "date", "count"))
 
   # set input to data.table
@@ -41,7 +42,7 @@ find_clusters_by_df <- function(
   # fix the date as IDate
   df[, date := data.table::as.IDate(date)]
 
-  # get the states, based
+  # get the states, based on the location values in the data frame
   tryCatch(
     states <- identify_states(df = df, level = level),
     error = function(e) stop("failed to identify states from data frame.")
@@ -51,6 +52,7 @@ find_clusters_by_df <- function(
 
   tryCatch(
     {
+      # get the distance object using create_dist_list
       dist_list <- create_dist_list(
         level = level,
         threshold = threshold_val,
@@ -69,10 +71,11 @@ find_clusters_by_df <- function(
     distance_matrix = dist_list,
     detect_date = latest_date,
     distance_limit = threshold_val,
+    # include any passed through args
     ...
   )
 
-  # return as json
+  # return conditionally as json or as regular result
   if (return_json == TRUE) {
     jsonlite::toJSON(clusters, pretty = TRUE)
   } else {
