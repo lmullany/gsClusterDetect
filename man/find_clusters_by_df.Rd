@@ -4,7 +4,7 @@
 \alias{find_clusters_by_df}
 \title{Wrapper: Find clusters by data frame only}
 \usage{
-find_clusters_by_df(df, threshold_val, level, ...)
+find_clusters_by_df(df, threshold_val, level, return_json = FALSE, ...)
 }
 \arguments{
 \item{df}{The data frame with location (char), date (IDate), and count (int)
@@ -14,10 +14,12 @@ columns}
 
 \item{level}{Can be "zip" or "county"}
 
+\item{return_json}{set to TRUE to return json}
+
 \item{...}{other arguments passed on to \code{find_clusters()}}
 }
 \value{
-json version of result from find_clusters()
+result from find_clusters(), optionally converted to json
 }
 \description{
 Wrapper around \code{find_clusters()} where only a data frame in the usual
@@ -27,7 +29,7 @@ auto created based on detected the states/locations given the data frame
 location column. The result will be returned as json
 }
 \examples{
-find_clusters_by_df(example_count_data, 50, "county")
+find_clusters_by_df(example_count_data, 50, "county", return_json=TRUE)
 
 }
 \seealso{

@@ -10,17 +10,19 @@
 #' columns
 #' @param threshold_val The cluster threshold (int) in miles
 #' @param level Can be "zip" or "county"
+#' @param return_json set to TRUE to return json
 #' @param ... other arguments passed on to \code{find_clusters()}
 #' @seealso [find_clusters()]
 #' @export
-#' @returns json version of result from find_clusters()
+#' @returns result from find_clusters(), optionally converted to json
 #' @examples
-#' find_clusters_by_df(example_count_data, 50, "county")
+#' find_clusters_by_df(example_count_data, 50, "county", return_json = TRUE)
 #'
 find_clusters_by_df <- function(
   df,
   threshold_val,
   level,
+  return_json = FALSE,
   ...
 ) {
   # match the level
@@ -71,5 +73,9 @@ find_clusters_by_df <- function(
   )
 
   # return as json
-  jsonlite::toJSON(clusters, pretty = TRUE)
+  if (return_json == TRUE) {
+    jsonlite::toJSON(clusters, pretty = TRUE)
+  } else {
+    clusters
+  }
 }
