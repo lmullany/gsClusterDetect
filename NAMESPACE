@@ -9,6 +9,7 @@ export(create_custom_dist_list)
 export(create_dist_list)
 export(custom_distance_matrix)
 export(find_clusters)
+export(find_clusters_by_df)
 export(gen_nearby_case_info)
 export(generate_case_grids)
 export(generate_heatmap)
@@ -30,12 +31,14 @@ export(tract_distance_matrix)
 export(tract_generator)
 export(us_distance_matrix)
 export(zip_distance_matrix)
-importFrom(data.table,"%chin%")
-importFrom(data.table,":=")
-importFrom(data.table,.BY)
-importFrom(data.table,.EACHI)
-importFrom(data.table,.GRP)
-importFrom(data.table,.I)
-importFrom(data.table,.N)
-importFrom(data.table,.NGRP)
-importFrom(data.table,.SD)
+importFrom(data.table,
+  "%chin%",
+  ":=",
+  .BY,
+  .EACHI,
+  .GRP,
+  .I,
+  .N,
+  .NGRP,
+  .SD
+)

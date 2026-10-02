@@ -1,0 +1,75 @@
+#' Wrapper: Find clusters by data frame only
+#'
+#' Wrapper around \code{find_clusters()} where only a data frame in the usual
+#' location, date, count format, a threshold value (distance limit), and the
+#' geographic resolution is required. The appropriate distance list will be
+#' auto created based on detected the states/locations given the data frame
+#' location column. The result will be returned as json
+#'
+#' @param df The data frame with location (char), date (IDate), and count (int)
+#' columns
+#' @param threshold_val The cluster threshold (int) in miles
+#' @param level Can be "zip" or "county"
+#' @param ... other arguments passed on to \code{find_clusters()}
+#' @seealso [find_clusters()]
+#' @export
+#' @returns json version of result from find_clusters()
+#' @examples
+#' find_clusters_by_df(example_count_data, 50, "county")
+#'
+find_clusters_by_df <- function(
+  df,
+  threshold_val,
+  level,
+  ...
+) {
+  # match the level
+  level <- match.arg(level, choices = c("zip", "county"))
+
+  # check that threshold_val is numeric and >0
+  if (!is.numeric(threshold_val) || threshold_val < 0) {
+    stop("threshold value must be a positive numeric value in miles")
+  }
+
+  check_vars(df, c("location", "date", "count"))
+
+  # set input to data.table
+  data.table::setDT(df)
+
+  # fix the date as IDate
+  df[, date := data.table::as.IDate(date)]
+
+  # get the states, based
+  tryCatch(
+    states <- identify_states(df = df, level = level),
+    error = function(e) stop("failed to identify states from data frame.")
+  )
+
+  if (is.null(states)) stop("failed to identify states from data frame")
+
+  tryCatch(
+    {
+      dist_list <- create_dist_list(
+        level = level,
+        threshold = threshold_val,
+        st = states
+      )
+    },
+    error = function(e) stop("failed to created distance list")
+  )
+
+  # get the maximum date
+  latest_date <- max(df[, date], na.rm = TRUE)
+
+  # call the find_clusters function
+  clusters <- find_clusters(
+    cases = df,
+    distance_matrix = dist_list,
+    detect_date = latest_date,
+    distance_limit = threshold_val,
+    ...
+  )
+
+  # return as json
+  jsonlite::toJSON(clusters, pretty = TRUE)
+}
