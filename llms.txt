@@ -138,6 +138,8 @@ LLC.
   : Example Count Dataset
 - [`find_clusters()`](https://lmullany.github.io/gsClusterDetect/reference/find_clusters.md)
   : Find clusters
+- [`find_clusters_by_df()`](https://lmullany.github.io/gsClusterDetect/reference/find_clusters_by_df.md)
+  : Wrapper: Find clusters by data frame only
 - [`gen_nearby_case_info()`](https://lmullany.github.io/gsClusterDetect/reference/gen_nearby_case_info.md)
   : Return baseline and test period case grids restricting by distance
 - [`generate_case_grids()`](https://lmullany.github.io/gsClusterDetect/reference/generate_case_grids.md)

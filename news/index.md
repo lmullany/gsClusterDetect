@@ -7,12 +7,18 @@
   ([\#41](https://github.com/lmullany/gsClusterDetect/issues/41))
 - aligns data types of built in zipcodes dataset with documentation
   ([\#40](https://github.com/lmullany/gsClusterDetect/issues/40))
-- most location functions can now take multiple state
+- most location functions can now take multiple states
   ([\#41](https://github.com/lmullany/gsClusterDetect/issues/41))
 - Added a vignette to describe the use of the
   [`inject_counts()`](https://lmullany.github.io/gsClusterDetect/reference/inject_counts.md)
   function for artificial signal generation
   ([\#31](https://github.com/lmullany/gsClusterDetect/issues/31))
+- Added a wrapper function
+  [`find_clusters_by_df()`](https://lmullany.github.io/gsClusterDetect/reference/find_clusters_by_df.md)
+  that wraps the identification of states using \`identify_states(), the
+  generation of the appropriate distance matrix, and cluster
+  identification; optionally returns json
+  ([\#49](https://github.com/lmullany/gsClusterDetect/issues/49))
 
 ## gsClusterDetect 1.0.1
 
