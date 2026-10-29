@@ -32,6 +32,7 @@ vector of state abbreviations
 
 ``` r
 identify_states(example_count_data, level = "zip")
+#> [1] "MS"
 identify_states(example_count_data, level = "county")
 #> [1] "OH"
 ```

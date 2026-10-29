@@ -54,7 +54,7 @@ cl <- find_clusters(
 )
 # get shape file
 ohio_shape <- tigris::counties("OH", cb = TRUE, class = "sf")
-#> Retrieving data for the year 2024
+#> Retrieving data for the year 2025
 
 # prepare map data
 md <- prepare_map_data(cl, ohio_shape, "GEOID")
