@@ -45,10 +45,10 @@ find_clusters_by_df <- function(
   # get the states, based on the location values in the data frame
   tryCatch(
     states <- identify_states(df = df, level = level),
-    error = function(e) stop("failed to identify states from data frame.")
+    error = function(e) stop("failed to identify any states from data frame.")
   )
 
-  if (is.null(states)) stop("failed to identify states from data frame")
+  if (is.null(states)) stop("failed to identify any states from data frame")
 
   tryCatch(
     {

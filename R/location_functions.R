@@ -878,12 +878,11 @@ identify_states <- function(
 ) {
   level <- match.arg(level)
   check_vars(df, location)
-  if (level == "zip") .identify_states_from_zips(df, location = location)
+  if (level == "zip") {
+    return(.identify_states_from_zips(df, location = location))
+  }
   if (level == "county") {
-    .identify_states_from_counties(
-      df,
-      location = location
-    )
+    return(.identify_states_from_counties(df,location = location))
   }
 }
 
