@@ -882,7 +882,7 @@ identify_states <- function(
     return(.identify_states_from_zips(df, location = location))
   }
   if (level == "county") {
-    return(.identify_states_from_counties(df,location = location))
+    .identify_states_from_counties(df, location = location)
   }
 }
 

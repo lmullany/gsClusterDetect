@@ -615,3 +615,24 @@ testthat::test_that("create_custom_dist_list validates inputs", {
     "cannot contain NA"
   )
 })
+
+# test for identifying states by counties and zip
+testthat::test_that("identify_states_validates", {
+  # error if not valid level
+  testthat::expect_error(gsClusterDetect::identify_states(
+    df = example_count_data, level = "state"
+  ))
+
+  # error if location column not found
+  testthat::expect_error(gsClusterDetect::identify_states(df = example_count_data, level = "zip", location = "wrong_col"))
+
+  # test that if example data interpreted as zip codes, return MS
+  testthat::expect_equal(gsClusterDetect::identify_states(
+    df = example_count_data, level = "zip"
+  ), "MS")
+
+  # test that if example data interpreted as zip codes, return OH
+  testthat::expect_equal(gsClusterDetect::identify_states(
+    df = example_count_data, level = "county"
+  ), "OH")
+})
